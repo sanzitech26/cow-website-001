@@ -76,15 +76,18 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14">
-        <h2 className="mb-8 text-3xl font-bold sm:text-4xl">Why buy from us</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {WHY.map(([t, d]) => (
-            <div key={t} className="rounded-2xl border border-sky-100 p-5">
-              <h3 className="mb-1 text-lg font-bold">{t}</h3>
-              <p className="text-sm text-slate-600">{d}</p>
-            </div>
-          ))}
+      <section className="bg-sky-50/60">
+        <div className="mx-auto max-w-5xl px-5 py-16">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">Our promise</p>
+          <h2 className="mb-8 text-3xl font-bold sm:text-4xl">Why buy from us</h2>
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            {WHY.map(([t, d]) => (
+              <div key={t} className="min-w-0 rounded-xl border border-sky-100 bg-white p-5">
+                <h3 className="mb-1 text-lg font-bold">{t}</h3>
+                <p className="text-sm text-slate-600">{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -108,16 +111,16 @@ export default async function Home() {
       )}
 
       {blog[0] && (
-        <section className="mx-auto max-w-6xl px-5 py-14">
-          <h2 className="mb-6 text-3xl font-bold sm:text-4xl">From the blog</h2>
-          <Link href={`/blog/${blog[0].slug}`} className="grid overflow-hidden rounded-2xl border border-sky-100 md:grid-cols-2">
-            {blog[0].cover && <img src={blog[0].cover} alt="" className="aspect-[16/10] w-full object-cover" loading="lazy" />}
-            <div className="flex flex-col justify-center p-6">
-              <h3 className="mb-2 text-2xl font-bold">{blog[0].title}</h3>
-              <p className="text-slate-600">{blog[0].excerpt}</p>
-              <span className="mt-4 font-semibold text-primary">Read more →</span>
+        <section className="bg-sky-50/60">
+          <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)] items-center gap-8 px-5 py-16 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] md:gap-14">
+            <div className="min-w-0">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">From the blog</p>
+              <h2 className="mb-4 text-3xl font-bold leading-tight sm:text-4xl">{blog[0].title}</h2>
+              <p className="mb-6 max-w-md text-slate-600">{blog[0].excerpt}</p>
+              <Link href={`/blog/${blog[0].slug}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-900 px-6 text-sm font-semibold hover:bg-slate-900 hover:text-white">Read the story</Link>
             </div>
-          </Link>
+            {blog[0].cover && <img src={blog[0].cover} alt="" className="aspect-[4/5] w-full min-w-0 rounded-2xl object-cover" loading="lazy" />}
+          </div>
         </section>
       )}
     </>
