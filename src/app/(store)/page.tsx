@@ -61,18 +61,20 @@ export default async function Home() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{latest.map((p) => <ProductCard key={p.id} p={p} />)}</div>
       </section>
 
-      <section className="bg-sky-50 py-14">
-        <div className="mx-auto max-w-6xl px-5">
-          <h2 className="mb-8 text-3xl font-bold sm:text-4xl">How ordering works</h2>
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-[#faf7f2]">
+        <div className="mx-auto max-w-5xl px-5 py-16">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">How it works</p>
+          <h2 className="mb-8 text-3xl font-bold sm:text-4xl">Four steps, start to delivery.</h2>
+          <ol className="grid grid-cols-[minmax(0,1fr)] gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[repeat(4,minmax(0,1fr))]">
             {STEPS.map(([t, d], i) => (
-              <li key={t} className="rounded-2xl bg-white p-5 shadow-sm">
-                <span className="mb-3 grid size-9 place-items-center rounded-full bg-primary font-bold text-white">{i + 1}</span>
+              <li key={t} className="min-w-0">
+                <span className="mb-3 grid size-10 place-items-center rounded-full bg-primary font-bold text-white">{i + 1}</span>
                 <h3 className="mb-1 text-lg font-bold">{t}</h3>
                 <p className="text-sm text-slate-600">{d}</p>
               </li>
             ))}
           </ol>
+          <Link href="/shop" className={`${btn} mt-10 bg-primary text-white shadow-lg`}>Start shopping</Link>
         </div>
       </section>
 
@@ -119,7 +121,7 @@ export default async function Home() {
               <p className="mb-6 max-w-md text-slate-600">{blog[0].excerpt}</p>
               <Link href={`/blog/${blog[0].slug}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-900 px-6 text-sm font-semibold hover:bg-slate-900 hover:text-white">Read the story</Link>
             </div>
-            {blog[0].cover && <img src={blog[0].cover} alt="" className="aspect-[4/5] w-full min-w-0 rounded-2xl object-cover" loading="lazy" />}
+            <img src={blog[0].cover || photo(P.cowField, 900)} alt="" className="aspect-[4/5] w-full min-w-0 rounded-2xl object-cover" loading="lazy" />
           </div>
         </section>
       )}
