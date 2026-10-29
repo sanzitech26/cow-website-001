@@ -55,7 +55,7 @@ function Form({ s }: { s?: S }) {
       {f("blurb", "Card description", s?.blurb)}
       {f("who", "Who it's for", s?.who)}
       <div className="grid gap-3 sm:grid-cols-3">{f("hangingWeight", "Hanging weight", s?.hangingWeight)}{f("packagedYield", "Packaged yield", s?.packagedYield)}{f("freezerSpace", "Freezer space", s?.freezerSpace)}</div>
-      <label className="block text-sm font-medium">Full cut list<textarea name="cuts" rows={3} defaultValue={s?.cuts} className={`${inp} mt-1`} /></label>
+      <label className="block text-sm font-medium">Full cut list <span className="font-normal text-slate-500">(one per line: Cut | amount. No amount = included)</span><textarea name="cuts" rows={8} defaultValue={s?.cuts} className={`${inp} mt-1`} /></label>
       <div className="grid gap-3 sm:grid-cols-2">{img("chart", "Cut chart image")}{img("photo", "Photo (shown in the cut list)")}</div>
       <FormSwitch name="published" label="Published" hint="Shown on the site and in the reserve form" defaultChecked={s?.published ?? true} />
       <div className="flex gap-3"><button className={s ? btn2 : btn}>{s ? "Save" : "Add share"}</button>{s && <button formAction={remove} formNoValidate className="text-sm font-semibold text-red-600">Delete</button>}</div>

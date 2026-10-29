@@ -84,9 +84,19 @@ export function ShareCard({ s }: { s: Share }) {
         <ShareStats s={s} />
         <div className="mt-auto grid gap-2 pt-1">
           <Link href={`/reserve?share=${s.id}`} className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:brightness-110">Reserve this share</Link>
-          <Link href={`/our-beef#share-${s.id}`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-900/60 px-4 text-sm font-semibold hover:bg-slate-900 hover:text-white">What&rsquo;s inside</Link>
+          <Link href={`/shares/${s.id}`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-900/60 px-4 text-sm font-semibold hover:bg-slate-900 hover:text-white">What&rsquo;s inside</Link>
         </div>
       </div>
     </article>
+  );
+}
+
+// Cut lists are stored one per line as "Cut | amount"; a line with no amount means it's included.
+export function CutTable({ cuts }: { cuts: string }) {
+  const rows = cuts.split("\n").map((l) => l.split("|").map((x) => x.trim())).filter((r) => r[0]);
+  return (
+    <dl className="space-y-2.5 text-sm">
+      {rows.map(([k, v], i) => <div key={i} className="flex justify-between gap-4"><dt className="text-slate-600">{k}</dt><dd className="shrink-0 text-right font-semibold">{v || "included"}</dd></div>)}
+    </dl>
   );
 }
