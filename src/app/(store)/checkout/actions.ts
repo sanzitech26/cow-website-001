@@ -6,7 +6,7 @@ import { db } from "@/db";
 import { orders, paymentMethods, products, variants } from "@/db/schema";
 import { getSettings } from "@/lib/settings";
 import { priceCart, type Line, type Priced } from "@/lib/pricing";
-import { notifyDiscord, orderText, sendMail } from "@/lib/notify";
+import { finishOrder } from "@/lib/notify";
 
 export async function priceCartAction(lines: Line[]): Promise<{ items: Priced[]; total: number; ok: boolean }> {
   return priceCart(lines);
@@ -46,15 +46,6 @@ export async function placeOrder(raw: Record<string, string>, lines: Line[]): Pr
     else await db.update(products).set({ stock: sql`${products.stock} - ${i.qty}` }).where(eq(products.id, i.productId));
   }
 
-  const text = orderText(order, s);
-  const admins = s.notifyEmails.split(/[,\s]+/).filter(Boolean);
-  await Promise.all([
-    notifyDiscord(s, text),
-    sendMail(s, admins, `New order ${number}`, text),
-    f.data.channel === "email" ? sendMail(s, [f.data.email], `Your order ${number}`, `Thanks for your order! We'll reply with payment details.\n\n${text}`) : undefined,
-  ]);
-
-  const handoff = f.data.channel === "whatsapp" ? `https://wa.me/${s.whatsapp}?text=${encodeURIComponent(text)}`
-    : f.data.channel === "sms" ? `sms:+${s.sms}?&body=${encodeURIComponent(text)}` : null;
+  const handoff = await finishOrder(order, s);
   return { number, handoff };
 }

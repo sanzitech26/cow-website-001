@@ -30,3 +30,17 @@ export async function sendMailStrict(s: Settings, to: string, subject: string, t
   const t = nodemailer.createTransport({ host: s.smtpHost, port: Number(s.smtpPort) || 587, secure: Number(s.smtpPort) === 465, auth: s.smtpUser ? { user: s.smtpUser, pass: s.smtpPass } : undefined });
   await t.sendMail({ from: s.smtpFrom || s.smtpUser, to, subject, text });
 }
+
+// Shared by checkout and reservations: alerts the admins, thanks the customer when they chose email, returns the WhatsApp/SMS handoff link.
+export async function finishOrder(o: Order, s: Settings, label = "order") {
+  const text = orderText(o, s);
+  await Promise.all([
+    notifyDiscord(s, text),
+    sendMail(s, s.notifyEmails.split(/[,\s]+/).filter(Boolean), `New ${label} ${o.number}`, text),
+    o.channel === "email" ? sendMail(s, [o.email], `Your ${label} ${o.number}`, `Thanks! We'll reply with payment details.
+
+${text}`) : undefined,
+  ]);
+  return o.channel === "whatsapp" ? `https://wa.me/${s.whatsapp}?text=${encodeURIComponent(text)}`
+    : o.channel === "sms" ? `sms:+${s.sms}?&body=${encodeURIComponent(text)}` : null;
+}

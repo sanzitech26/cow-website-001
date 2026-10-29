@@ -104,6 +104,25 @@ export const orders = pgTable("orders", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// A reservable beef/pork share. Prices in cents; weights are free text ("80-90 lbs").
+export const shares = pgTable("shares", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  kind: text("kind").notNull().default("beef"), // beef|pork
+  badge: text("badge").notNull().default(""),
+  priceCents: integer("price_cents").notNull(),
+  blurb: text("blurb").notNull().default(""),
+  who: text("who").notNull().default(""),
+  hangingWeight: text("hanging_weight").notNull().default(""),
+  packagedYield: text("packaged_yield").notNull().default(""),
+  freezerSpace: text("freezer_space").notNull().default(""),
+  cuts: text("cuts").notNull().default(""),
+  chart: text("chart"),
+  photo: text("photo"),
+  position: integer("position").notNull().default(0),
+  published: boolean("published").notNull().default(true),
+});
+
 export const faqs = pgTable("faqs", {
   id: serial("id").primaryKey(),
   question: text("question").notNull(),

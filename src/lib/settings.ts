@@ -4,9 +4,16 @@ import { sql } from "drizzle-orm";
 
 // Adding a setting = adding a key here.
 export const DEFAULTS = {
-  storeName: "Meadowbrook Cattle Co.",
-  tagline: "Cattle, dairy, beef & farm goods, straight from the pasture",
-  banner: "Free local delivery on orders over $100",
+  storeName: "Anord's",
+  brandSub: "Grass Fed Beef Shares",
+  tagline: "A family tradition since 1998. 100% grass fed and grass finished beef, shipped from our family's pasture to your freezer.",
+  heroEyebrow: "Thomasville, Georgia · Since 1998",
+  founder: "Anord",
+  banner: "Free shipping on every share",
+  farmNote: "Farm visits by appointment",
+  facebook: "",
+  freezerNote: "Roughly one cubic foot per 35–40 lbs of vacuum-packed meat.",
+  shipNote: "Shipping is included on every share, anywhere in the US. Most orders leave within 1–4 business days and arrive 1–3 business days later.",
   phone: "",
   email: "",
   address: "",
