@@ -23,7 +23,11 @@ export default async function Home() {
             <a href="#shares" className={btnRed}>See the shares</a>
             {tel && <a href={`tel:${tel}`} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/70 px-7 font-semibold text-white">Call {s.phone}</a>}
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-white/80">{TRUST.map((t) => <li key={t} className="before:mr-4 before:content-['|'] first:before:hidden">{t}</li>)}</ul>
+        </div>
+        <div className="mt-10 border-t border-white/20 bg-black/45 backdrop-blur-sm">
+          <ul className="mx-auto grid max-w-5xl grid-cols-[repeat(2,minmax(0,1fr))] gap-x-4 gap-y-2 px-5 py-4 text-xs font-medium text-white sm:flex sm:flex-wrap sm:justify-between">
+            {TRUST.map((t) => <li key={t} className="flex min-w-0 items-center gap-2"><span aria-hidden className="size-1.5 shrink-0 rounded-full bg-amber-300" />{t}</li>)}
+          </ul>
         </div>
       </section>
 

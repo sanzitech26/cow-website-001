@@ -84,7 +84,7 @@ export function ShareCard({ s }: { s: Share }) {
         <ShareStats s={s} />
         <div className="mt-auto grid gap-2 pt-1">
           <Link href={`/reserve?share=${s.id}`} className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:brightness-110">Reserve this share</Link>
-          <Link href="/our-beef#shares" className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-900/60 px-4 text-sm font-semibold hover:bg-slate-900 hover:text-white">What&rsquo;s inside</Link>
+          <Link href={`/our-beef#share-${s.id}`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-900/60 px-4 text-sm font-semibold hover:bg-slate-900 hover:text-white">What&rsquo;s inside</Link>
         </div>
       </div>
     </article>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getSettings } from "@/lib/settings";
 import { getShares, price } from "@/lib/shares";
 import { CLAIMS } from "@/lib/copy";
+import { OpenOnHash } from "@/components/OpenOnHash";
 import { Band, Cards, Eyebrow, ShareStats, btnRed } from "@/components/site";
 
 export default async function OurBeef() {
@@ -9,6 +10,7 @@ export default async function OurBeef() {
   const shares = all.filter((x) => x.published);
   return (
     <>
+      <OpenOnHash />
       <section className="bg-cream">
         <div className="mx-auto max-w-5xl px-5 py-16">
           <Eyebrow>Our beef</Eyebrow>
@@ -39,7 +41,7 @@ export default async function OurBeef() {
           <p className="mb-8 max-w-xl text-slate-600">Beef first, then the two pasture-raised pork shares. Yields vary a little animal to animal — these are honest ranges, not marketing numbers.</p>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-[repeat(2,minmax(0,1fr))]">
             {shares.map((x) => (
-              <article key={x.id} className="min-w-0 rounded-xl border border-stone-200/70 bg-white p-5 shadow-sm">
+              <article key={x.id} id={`share-${x.id}`} className="min-w-0 scroll-mt-24 rounded-xl border border-stone-200/70 bg-white p-5 shadow-sm">
                 <h3 className="font-heading text-lg font-bold">{x.name} — {price(x.priceCents)}</h3>
                 <p className="mb-3 text-sm text-slate-600">{x.who}</p>
                 <div className="text-sm"><ShareStats s={x} /></div>
