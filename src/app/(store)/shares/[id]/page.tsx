@@ -11,7 +11,7 @@ export default async function ShareDetail({ params }: { params: Promise<{ id: st
   const [s] = Number.isInteger(id) ? await db.select().from(shares).where(eq(shares.id, id)) : [];
   if (!s?.published) notFound();
   const rows = [["Best for", s.who], ["Hanging weight", s.hangingWeight], ["Packaged yield", s.packagedYield], ["Freezer space", s.freezerSpace]];
-  const lower = s.name.toLowerCase();
+  const short = s.name.toLowerCase().replace(/ (beef|pig)$/, "");
   return (
     <>
       <section className="bg-cream">
@@ -37,14 +37,14 @@ export default async function ShareDetail({ params }: { params: Promise<{ id: st
       <section className="bg-sand">
         <div className="mx-auto max-w-5xl px-5 py-16">
           <Eyebrow>What&rsquo;s inside</Eyebrow>
-          <h2 className="mb-4 text-3xl font-bold sm:text-4xl">Your {lower.replace(/ (beef|pig)$/, "")} {s.kind === "pork" ? "pork" : "beef"}, cut by cut.</h2>
-          <p className="mb-10 max-w-2xl text-slate-600">Ranges, not promises — every animal hangs a little differently. You choose the details on the butcher&rsquo;s cut sheet after you reserve.</p>
+          <h2 className="mb-4 text-3xl font-bold sm:text-4xl">{s.detailHeading || `Your ${short} ${s.kind === "pork" ? "pork" : "beef"}, cut by cut.`}</h2>
+          <p className="mb-10 max-w-2xl text-slate-600">{s.detailIntro || "Ranges, not promises — every animal hangs a little differently. You choose the details on the butcher’s cut sheet after you reserve."}</p>
           <div className="grid grid-cols-[minmax(0,1fr)] items-center gap-8 md:grid-cols-[repeat(2,minmax(0,1fr))] md:gap-14">
             <div className="min-w-0 rounded-xl border border-stone-200/70 bg-white p-6 shadow-sm">{s.cuts ? <CutTable cuts={s.cuts} /> : <p className="text-sm text-slate-600">Cut list coming soon.</p>}</div>
             {s.chart && (
               <figure className="min-w-0">
                 <img src={s.chart} alt={`${s.name} cut chart`} className="aspect-[5/4] w-full rounded-2xl bg-white object-cover" />
-                <figcaption className="mt-3 text-sm text-slate-600">The shaded area is roughly what comes home with you.</figcaption>
+                <figcaption className="mt-3 text-sm text-slate-600">{s.chartCaption || "The shaded area is roughly what comes home with you."}</figcaption>
               </figure>
             )}
           </div>

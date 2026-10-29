@@ -18,7 +18,8 @@ async function save(fd: FormData) {
   const data = {
     name: text(fd, "name"), kind: text(fd, "kind") === "pork" ? "pork" : "beef", badge: text(fd, "badge"), priceCents: cents(fd.get("price")),
     blurb: text(fd, "blurb"), who: text(fd, "who"), hangingWeight: text(fd, "hangingWeight"), packagedYield: text(fd, "packagedYield"),
-    freezerSpace: text(fd, "freezerSpace"), cuts: text(fd, "cuts"), position: Number(fd.get("position")) || 0, published: fd.get("published") === "on",
+    freezerSpace: text(fd, "freezerSpace"), cuts: text(fd, "cuts"),
+    detailHeading: text(fd, "detailHeading"), detailIntro: text(fd, "detailIntro"), chartCaption: text(fd, "chartCaption"), position: Number(fd.get("position")) || 0, published: fd.get("published") === "on",
     chart: await pic("chart", text(fd, "chartOld") || null), photo: await pic("photo", text(fd, "photoOld") || null),
   };
   if (!data.name) return;
@@ -56,6 +57,12 @@ function Form({ s }: { s?: S }) {
       {f("who", "Who it's for", s?.who)}
       <div className="grid gap-3 sm:grid-cols-3">{f("hangingWeight", "Hanging weight", s?.hangingWeight)}{f("packagedYield", "Packaged yield", s?.packagedYield)}{f("freezerSpace", "Freezer space", s?.freezerSpace)}</div>
       <label className="block text-sm font-medium">Full cut list <span className="font-normal text-slate-500">(one per line: Cut | amount. No amount = included)</span><textarea name="cuts" rows={8} defaultValue={s?.cuts} className={`${inp} mt-1`} /></label>
+      <fieldset className="space-y-3 rounded-xl border border-slate-200 p-3">
+        <legend className="px-1 text-sm font-semibold">Share page text <span className="font-normal text-slate-500">(leave empty to use the default)</span></legend>
+        {f("detailHeading", "Heading above the cut list", s?.detailHeading)}
+        {f("detailIntro", "Intro under the heading", s?.detailIntro)}
+        {f("chartCaption", "Caption under the chart", s?.chartCaption)}
+      </fieldset>
       <div className="grid gap-3 sm:grid-cols-2">{img("chart", "Cut chart image")}{img("photo", "Photo (shown in the cut list)")}</div>
       <FormSwitch name="published" label="Published" hint="Shown on the site and in the reserve form" defaultChecked={s?.published ?? true} />
       <div className="flex gap-3"><button className={s ? btn2 : btn}>{s ? "Save" : "Add share"}</button>{s && <button formAction={remove} formNoValidate className="text-sm font-semibold text-red-600">Delete</button>}</div>
