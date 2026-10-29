@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Phone } from "lucide-react";
 import { getSettings } from "@/lib/settings";
 import { MobileMenu } from "@/components/MobileMenu";
 import { LiveChat } from "@/components/LiveChat";
@@ -31,6 +32,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
             {LINKS.map((l) => <Link key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-medium hover:text-primary">{l.label}</Link>)}
           </nav>
           {tel && <a href={`tel:${tel}`} className="hidden min-h-10 items-center rounded-full border border-primary px-4 text-sm font-semibold text-primary lg:inline-flex">☎ {s.phone}</a>}
+          {tel && <a href={`tel:${tel}`} aria-label={`Call ${s.phone}`} className="grid size-11 place-items-center rounded-full border border-primary text-primary lg:hidden"><Phone className="size-5" /></a>}
           <MobileMenu links={LINKS}>
             {tel && <a href={`tel:${tel}`} className="flex min-h-12 items-center justify-center rounded-full bg-primary font-semibold text-white">Call {s.phone}</a>}
           </MobileMenu>
