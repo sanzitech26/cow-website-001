@@ -11,6 +11,7 @@ export const DEFAULTS = {
   founder: "Anord",
   banner: "Free shipping on every share",
   farmNote: "Farm visits by appointment",
+  copyNote: "A family tradition since 1998.",
   facebook: "",
   freezerNote: "Roughly one cubic foot per 35–40 lbs of vacuum-packed meat.",
   shipNote: "Shipping is included on every share, anywhere in the US. Most orders leave within 1–4 business days and arrive 1–3 business days later.",

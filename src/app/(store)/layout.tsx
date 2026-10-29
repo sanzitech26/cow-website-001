@@ -62,7 +62,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
             </ul>
           </div>
         </div>
-        <p className="mx-auto max-w-5xl border-t border-stone-700 px-5 py-4 text-xs text-stone-400">© {new Date().getFullYear()} {s.storeName} {s.brandSub}. · <Link href="/privacy" className="text-amber-200 underline">Privacy</Link></p>
+        <p className="mx-auto max-w-5xl border-t border-stone-700 px-5 pb-28 pt-6 text-sm text-stone-400 lg:pb-6">© {new Date().getFullYear()} {s.storeName} {s.brandSub}. {s.copyNote && `${s.copyNote} `}· <Link href="/privacy" className="text-amber-200 underline">Privacy</Link></p>
       </footer>
 
       {/* Sticky mobile action bar */}

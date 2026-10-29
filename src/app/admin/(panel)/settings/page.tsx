@@ -30,6 +30,7 @@ export default async function Settings({ searchParams }: { searchParams: Promise
         <T name="email" label="Public email" v={s.email} type="email" />
         <T name="address" label="Address" v={s.address} area />
         <T name="farmNote" label="Footer note (e.g. Farm visits by appointment)" v={s.farmNote} />
+        <T name="copyNote" label="Copyright line, after the brand name (empty hides it)" v={s.copyNote} />
         <T name="facebook" label="Facebook page URL (empty hides the link)" v={s.facebook} />
         <T name="freezerNote" label="Freezer rule of thumb (Home page)" v={s.freezerNote} />
         <T name="shipNote" label="Shipping note (Our Beef and Reserve pages)" v={s.shipNote} area />
